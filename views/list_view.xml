@@ -24,6 +24,5 @@
         <menuitem id="menu_my_model" name="My Models"
                   parent="menu_my_module_root"
                   action="action_my_model_list"/>
-
     </data>
 </odoo>

@@ -12,7 +12,7 @@
                 </list>
             </field>
         </record>
-
+            
         <record id="view_cart_model_form" model="ir.ui.view">
             <field name="name">cart.model.form</field>
             <field name="model">cart.model</field>

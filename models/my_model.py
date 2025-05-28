@@ -16,3 +16,12 @@ class Cart(models.Model):
     company_name = fields.Char("Company Name")
     price = fields.Char("Price")
     
+
+class Students(models.Model):
+    _name = "students.model"
+    _description = "This is Stduents model"
+
+    first_name = fields.Char("First Name", required=True)
+    last_name = fields.Char("Last Name")
+    phone_number = fields.Integer("Phone Number")
+    department = fields.Char("Department")

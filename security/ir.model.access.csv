@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_my_model,my.model access,model_my_model,,1,1,1,1
 access_cart_model,cart.model access,model_cart_model,,1,1,1,1
+access_students_model,students.model access,model_students_model,,1,1,1,1

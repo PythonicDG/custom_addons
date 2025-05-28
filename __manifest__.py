@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'views/list_view.xml',
         'views/cart_views.xml',
+        'views/students_views.xml'
     ],
     'installable': True,
     'application': True,

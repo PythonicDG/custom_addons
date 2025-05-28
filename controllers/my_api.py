@@ -22,13 +22,27 @@ class SimpleAPI(http.Controller):
             return {'message': 'data uploaed', 'records': record.id}    
 
 
+
+
         @http.route('/api/my_model/read_data', type='json', auth='public', methods=['POST'], csrf=False)
         def read_data(self):
-            
             records = request.env['my.model'].sudo().search([])
 
-            record_names = [record.name for record in records]
-            
+            data = []
+            for record in records:
+                data.append({
+                    'id': record.id,
+                    'name': record.name,
+                    'description': record.description
+                })
+
+            return {
+                'status': 200,
+                'message': 'Data fetched successfully',
+                'count': len(data),
+                'data': data
+            }
+
 
         @http.route('/api/my_model/<int:res_id>/update', type='json', auth='public', methods=['POST'], csrf=False)
         def update_record(self, res_id, **data):
