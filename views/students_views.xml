@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree (List) View -->
+        <record id="view_students_list" model="ir.ui.view">
+            <field name="name">students.model.list</field>
+            <field name="model">students.model</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="phone_number"/>
+                    <field name="department"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action Window -->
+        <record id="action_students_list" model="ir.actions.act_window">
+            <field name="name">Students Models</field>
+            <field name="res_model">students.model</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_students_list"/>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_students_root" name="Students Models"/>
+        <menuitem id="my_students_model" name="Students Models"
+                  parent="menu_students_root"
+                  action="action_students_list"/>
+
+    </data>
+</odoo>
