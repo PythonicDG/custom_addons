@@ -13,7 +13,6 @@ class ProductTemplate(models.Model):
         index=True
     )
     
-
     def convert_slug(self, text):
 
         if not isinstance(text, str):
