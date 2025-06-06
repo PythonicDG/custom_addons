@@ -36,5 +36,3 @@ class ProductTemplate(models.Model):
                 record.slug = self.convert_slug(record.name)
             else:
                 record.slug = ''
-
-
