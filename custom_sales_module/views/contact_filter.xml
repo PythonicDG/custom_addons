@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+    <record id="res_partner_search_filter" model="ir.ui.view">
+        <field name="name">res.partner.filter.contacts_only</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='customer']" position="after">
+
+                <filter string="Contacts Only"
+                        name="contacts_only_filter"
+                        domain="[('is_company', '=', False), ('parent_id', '!=', False)]"
+                        help="Child contacts under a company"/>
+
+                <filter name="invoice_address"
+                        string="Invoice Address"
+                        domain="[('type', '=', 'invoice')]"
+                        help="Filter by invoice address"/>
+
+                <filter name="delivery_address"
+                        string="Delivery Address"
+                        domain="[('type', '=', 'delivery')]"
+                        help="Filter by delivery address"/>
+
+                <filter name="contact_address"
+                        string="Contact Address"
+                        domain="[('type', '=', 'contact')]"
+                        help="Filter by contact address"/>
+
+                <filter name="other_address"
+                        string="Other Address"
+                        domain="[('type', '=', 'other')]"
+                        help="Filter by other address"/>
+
+                <filter name="parents"
+                        string="Parents"
+                        domain="[('parent_id', '=', False)]"
+                        help="Filter by parents"/>
+
+                <filter name="vendor"
+                        string="Vendors"
+                        domain="[('supplier_rank', '>', 0)]"
+                        help="Filter by vendors"/>
+
+                <filter name="vendor_category"
+                        string="Vendor Category"
+                        domain="[('category_id.name', '=', 'vendor')]"
+                        help="Filter by vendor category"/>
+
+                <filter name="Childs"
+                        string="Childs"
+                        domain="[('parent_id', '!=', False)]"
+                        help="Filter by childs"/>
+            </xpath>
+
+        </field>
+    </record>
+    </data>
+</odoo>
