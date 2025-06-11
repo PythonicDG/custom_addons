@@ -1,12 +1,13 @@
 {
     'name': 'Custom Sales Module',
     'version': '1.0',
-    'depends': ['sale', 'product', 'contacts'],  # ensure 'product' is listed
+    'depends': ['sale', 'product', 'contacts', 'purchase'],  # ensure 'product' is listed
     'data': [
         'views/sales_person_form.xml',
         'views/product_views.xml',
         'views/product_slug_name.xml',
-        'views/contact_filter.xml'
+        'views/contact_filter.xml',
+        "views/purchase_vendor.xml"
     ],
     'installable': True,
     'application': True,

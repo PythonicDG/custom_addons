@@ -5,12 +5,9 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
+
             <xpath expr="//filter[@name='customer']" position="after">
 
-                <filter string="Contacts Only"
-                        name="contacts_only_filter"
-                        domain="[('is_company', '=', False), ('parent_id', '!=', False)]"
-                        help="Child contacts under a company"/>
 
                 <filter name="invoice_address"
                         string="Invoice Address"
@@ -34,7 +31,7 @@
 
                 <filter name="parents"
                         string="Parents"
-                        domain="[('parent_id', '=', False)]"
+                        domain="['|', ('parent_id', '=', False), ('child_ids', '!=', False )]"
                         help="Filter by parents"/>
 
                 <filter name="vendor"
@@ -51,6 +48,14 @@
                         string="Childs"
                         domain="[('parent_id', '!=', False)]"
                         help="Filter by childs"/>
+            </xpath>
+
+            <xpath expr="//group[@name='group_by']" position="after">
+
+                <filter string="Group By Individual and Company"
+                        name="group_by_individual_company"
+                        context="{'group_by': 'is_company'}"
+                        help="Group by individual and company"/>
             </xpath>
 
         </field>
