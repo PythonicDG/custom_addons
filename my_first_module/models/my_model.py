@@ -28,7 +28,7 @@ class Students(models.Model):
     last_name = fields.Char("Last Name", translate=True)
     phone_number = fields.Char("Phone Number")
     department = fields.Char("Department", translate=True)
-    email = fields.Char("Email", required=True)
+    email = fields.Char("Email--", required=True)
 
     # def create(self, vals_list):
     #    record = super(Students, self).create(vals_list)
