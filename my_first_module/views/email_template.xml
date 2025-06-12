@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+        <record id="email_template_student_welcome_basic" model="mail.template">
+            <field name="name">Student Welcome Basic Email</field>
+            <field name="model_id" ref="my_first_module.model_students_model"/>
+            <field name="subject">Welcome, {{ object.first_name }}!</field>
+            <field name="email_from">dipakgaikwadms@gmail.com</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">en_US</field>
+
+            <field name="body_html" type="html">
+                <div style="max-width:600px; margin:0 auto; padding:20px; background-color:#f9f9f9; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border:1px solid #e0e0e0; border-radius:8px;">
+
+                    <div style="text-align:center; padding-bottom:20px;">
+
+                    <h2 style="color:#4A90E2; margin-bottom:0;">
+                        <t t-set="msg" t-value="ctx.get('message')"/>
+                        <t t-out="msg"/>
+                    </h2>
+
+
+                    </div>
+
+                    <div style="font-size:15px; color:#333;">
+                        <p>Thank you for joining our platform. We're committed to providing you the best experience and support throughout your journey with us.</p>
+                        <p>If you have any questions, don't hesitate to reach out to our team.</p>
+                    </div>
+
+                    <div style="text-align:center; margin-top:30px;">
+                        <a href="http://localhost:8069/odoo/action-477" style="background-color:#4A90E2; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; font-weight:bold;">Visit Dashboard</a>
+                    </div>
+
+                    <div style="margin-top:40px; text-align:center; font-size:12px; color:#aaa;">
+                        <p>© 2025 Your Company Name. All rights reserved.</p>
+                    </div>
+                </div>
+            </field>
+
+        </record>
+    </data>
+</odoo>
