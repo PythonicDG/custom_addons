@@ -3,16 +3,18 @@ from odoo.http import request
 
 class MyApi(http.Controller):
 
-    def get_employee_hyerarchy(self, employee):
-        heirarchy = {
-            'name': employee.name,
-            'work_email': employee.work_email,
-            'Company': employee.company_id.name,
-            'job_title': employee.job_id.name,
-            'subordinates': [self.get_employee_hyerarchy(child) for child in employee.child_ids]
-        }
+    def get_employee_hierarchy(self, employee):
+        h = []
 
-        return heirarchy
+        for emp in employee:
+            h.append({
+                'name': emp.name,
+                'work_email': emp.work_email,
+                'job_title': emp.job_id.name,
+                'subordinates': self.get_employee_hierarchy(emp.child_ids)
+            })
+
+        return h
 
     @http.route('/api/fetch_employee_details', type='json', auth='public', methods=['POST'], csrf=False)
     def fetch_employee_details(self, **data):
@@ -36,8 +38,8 @@ class MyApi(http.Controller):
             coach = 'No Coach'
 
         coach = employee.coach_id.name
-        
-        hierarchy = self.get_employee_hyerarchy(employee)
+
+        hierarchy = self.get_employee_hierarchy(employee)
 
         return {
             'employee': {
