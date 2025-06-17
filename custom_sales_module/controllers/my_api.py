@@ -2,7 +2,15 @@ from odoo import http
 from odoo.http import request
 
 class MyApi(http.Controller):
-
+    
+    def count_parent(self, employee):
+        count = 0
+        current = employee.parent_id
+        while current:
+            count += 1
+            current = current.parent_id
+        return count
+        
     def get_employee_hierarchy(self, employee):
         h = []
 
@@ -11,6 +19,7 @@ class MyApi(http.Controller):
                 'name': emp.name,
                 'work_email': emp.work_email,
                 'job_title': emp.job_id.name,
+                'possible parents count': self.count_parent(emp),
                 'subordinates': self.get_employee_hierarchy(emp.child_ids)
             })
 

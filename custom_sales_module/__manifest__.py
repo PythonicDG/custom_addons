@@ -7,7 +7,8 @@
         'views/product_views.xml',
         'views/product_slug_name.xml',
         'views/contact_filter.xml',
-        "views/purchase_vendor.xml"
+        "views/purchase_vendor.xml",
+        "views/custom_settings.xml"
     ],
     'installable': True,
     'application': True,

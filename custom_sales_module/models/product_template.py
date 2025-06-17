@@ -36,4 +36,11 @@ class ProductTemplate(models.Model):
                 record.slug = self.convert_slug(record.name)
             else:
                 record.slug = ''
-                
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    custom_field_1 = fields.Boolean(string="Enable settings")
+    custom_field_2 = fields.Char(string="custom_field_2")
+    custom_field_3 = fields.Boolean(string="custom_field_3")
+
