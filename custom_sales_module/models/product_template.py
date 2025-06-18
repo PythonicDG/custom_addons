@@ -74,9 +74,3 @@ class ResConfigSettings(models.TransientModel):
     #         custom_field_3=config.get_param('custom_sales_module.custom_field_3') == 'True',
     #     )
     #     return res
-
-
-
-
-
-

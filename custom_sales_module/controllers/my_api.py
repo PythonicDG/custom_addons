@@ -1,4 +1,4 @@
-from odoo import http
+from odoo import conf, http
 from odoo.http import request
 
 class MyApi(http.Controller):
@@ -60,6 +60,34 @@ class MyApi(http.Controller):
                 'Subordinates': hierarchy
             }
         }
+
+    @http.route('/api/fetch_settings', type='json', auth='public', methods=['POST'], csrf=False)
+    def set_settings(self, **data):
+        config = request.env['ir.config_parameter'].sudo()
+        f1 = data.get('custom_field_1')
+        f2 = data.get('custom_field_2')
+        f3 = data.get('custom_field_3')
+        print(type(f1))
+
+        
+        config.set_param('custom_sales_module.custom_field_1', f1)
+        config.set_param('custom_sales_module.custom_field_2', f2)
+        config.set_param('custom_sales_module.custom_field_3', f3)
+
+        return {
+            'status': 'success',
+            'data': {
+                'custom_field_1': f1,
+                'custom_field_2': f2,
+                'custom_field_3': f3
+            }
+        }
+
+    
+
+
+
+
 
 
 
