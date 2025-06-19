@@ -11,7 +11,7 @@
         'views/list_view.xml',
         'views/cart_views.xml',
         'views/students_views.xml',
-        'views/email_template.xml',
+        'views/email_template.xml'
     ],
     'installable': True,
     'application': True,

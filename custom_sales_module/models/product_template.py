@@ -55,6 +55,7 @@ class ResConfigSettings(models.TransientModel):
         config_parameter='custom_sales_module.custom_field_3'
     )
 
+    
 
 
     # def set_values(self):

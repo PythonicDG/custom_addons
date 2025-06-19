@@ -49,3 +49,20 @@ class Students(models.Model):
 
    
     
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    custom_field_1 = fields.Boolean(
+        string="Enable Setting",
+        config_parameter='custom_sales_module.custom_field_1'
+    )
+    
+    custom_field_2 = fields.Char(
+        string="Custom Field 2",
+        config_parameter='custom_sales_module.custom_field_2'
+    )
+    
+    custom_field_3 = fields.Boolean(
+        string="Custom Field 3",
+        config_parameter='custom_sales_module.custom_field_3'
+    )

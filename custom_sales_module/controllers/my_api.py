@@ -67,6 +67,7 @@ class MyApi(http.Controller):
         f1 = data.get('custom_field_1')
         f2 = data.get('custom_field_2')
         f3 = data.get('custom_field_3')
+        
         print(type(f1))
 
         
