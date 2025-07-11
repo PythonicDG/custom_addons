@@ -1,0 +1,33 @@
+<odoo>
+
+    <template id="web_external_layout_bold_inherit_custom_fields" inherit_id="web.external_layout_wave">
+        
+        <xpath expr="//t[@t-call='web.address_layout']" position="after">
+            <t t-if="o and o.user_id">
+                <div class="mt-2">
+                    <strong>Salesperson:</strong>&#160;<span t-esc="o.user_id.name"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    
+<!-- 
+     <template id="document_tax_totals_inherit_payment_method" inherit_id="account.document_tax_totals_template">
+    <xpath expr="//tr[@class='o_total']" position="after">
+        <tr>
+            <td><strong>Payment Method</strong></td>
+            <td class="text-end">
+                <t t-if="o.matched_payment_ids">
+                    <span t-esc="o.matched_payment_ids[-1].payment_method_line_id.name"/>
+                </t>
+                <t t-else="">
+                    <span>N/A</span>
+                </t>
+            </td>
+        </tr>
+    </xpath>
+</template>  -->
+    
+</odoo> 
+
+

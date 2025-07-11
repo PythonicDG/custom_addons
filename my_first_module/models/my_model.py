@@ -66,3 +66,7 @@ class ResConfigSettings(models.TransientModel):
         string="Custom Field 3",
         config_parameter='custom_sales_module.custom_field_3'
     )
+
+    module_students_custom_feature = fields.Boolean(
+        string="Enable Student Feature"
+    )
