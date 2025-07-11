@@ -1,4 +1,6 @@
-from odoo import conf, http
+from os import name
+from werkzeug import Response
+from odoo import http
 from odoo.http import request
 
 class MyApi(http.Controller):
@@ -84,10 +86,106 @@ class MyApi(http.Controller):
             }
         }
 
+    @http.route('/api/create_invoice', type='json', auth='public', methods=['POST'], csrf=False)
+    def create_invoice(self, **data):
+        sale_order_id = data.get('sale_order_id')
+        
+        if not sale_order_id:
+            return {
+                "result": False,
+                "error": "Sales order ID is required"
+            }
+                
+        sale_order = request.env['sale.order'].sudo().browse(sale_order_id)
+
+        if not sale_order.exists():
+            return {
+                "result": False,
+                "error": "Sales order not found"
+            }
+        
+        products_with_price = {}
+
+        for product in sale_order.order_line:
+            products_with_price[product.product_id.name] = {
+                'price': product.price_unit,
+                'quantity': product.product_uom_qty
+            }
+
+        return {
+            "result": True,
+            "order_id": sale_order.id,
+            "order_name": sale_order.name,
+            "customer_name": sale_order.partner_id.name,
+            "products": products_with_price,
+            "amount_total": sale_order.amount_total,
+        }
+
+    @http.route("/api/get_dues", type='json', methods=['POST'], csrf=False, auth='public' )
+    def get_dues(self, **data):
+        customer_id = data.get('customer_id')   
+
+        partner = request.env['res.partner'].sudo().browse(customer_id)
+
+        if not partner:
+            return {
+                "result": False,
+                "error": "partner not exists"
+            }
+
+        invoices = request.env['account.move'].sudo().search([
+            ('partner_id', '=', partner.id),
+            ('state','=','posted'),
+            ('payment_state', '!=', 'paid'),
+            ('move_type', '=', 'out_invoice')
+            ])
+
+        total_due = 0
+        
+        for inv in invoices:
+            total_due += inv.amount_residual
+
+        payments = request.env['account.move'].sudo().search([
+            ('partner_id', '=', partner.id)
+        ])
+
+        dates = []
+        for payment in payments:
+            dates.append(payment.date)
+            
+        # print(total_due)
+
+        return {
+            "result": True,
+            "customer": customer_id,
+            "customer_name": partner.name,
+            "customer_email": partner.email,
+            "total due": total_due,
+            "total_unpaid_invoices": len(invoices),
+            "total payments": len(payments),
+            "payments": payments,
+            "dates": dates[0],
+        }
+        
     
+    @http.route('/api/fetch_total_users', methods=['POST'], csrf=False, type='json', auth='public')
+    def fetch_total_users(self):
+        customers = request.env['res.users'].sudo().search([])
+        users = []
+        for customer in customers:
+            users.append({
+                'user': customer.id,
+                'name': customer.name,
+                'login': customer.login
+            })
+        return {
+            'result': True,
+            'users': users
+        }
 
-
-
+    @http.route('/api/', type='json', auth='public', csrf=False, methods=['POST'])
+    def my_function(self, **data):
+        pass
 
 
 

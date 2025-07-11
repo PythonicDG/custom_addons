@@ -30,37 +30,38 @@
                   parent="menu_students_root"
                   action="action_students_list"/>
 
-                <record id="view_students_config_settings" model="ir.ui.view">
+        <record id="view_students_config_settings" model="ir.ui.view">
             <field name="name">res.config.settings.view.form.inherit.students</field>
             <field name="model">res.config.settings</field>
             <field name="inherit_id" ref="base.res_config_settings_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form" position="inside">
-                    <app string="Students" name="students_app" groups="base.group_system">
+
+                <xpath expr="//form[1]" position="inside">
+
+                    <app string="Students" name="students_app" groups="base.group_system" logo="">
                         <block title="Student Configuration" name="student_setting_container">
-                            <setting id="enable_student_feature" string="Enable Student Feature" help="Enable extra features for students">
-                            </setting>
+                            <setting id="enable_student_feature" string="Enable Student Feature" help="Enable extra features for students" field="module_students_custom_feature"/>
                         </block>
                     </app>
+
                 </xpath>
+
             </field>
         </record>
 
-        <!-- Action for Settings Page -->
         <record id="action_students_config_settings" model="ir.actions.act_window">
             <field name="name">Settings</field>
             <field name="res_model">res.config.settings</field>
             <field name="view_mode">form</field>
             <field name="target">inline</field>
-            <field name="context">{'module': 'my_first_module', 'bin_size': False, 'my_first_module':True}</field>
+            <field name="context">{'module': 'students_app', 'bin_size': False}</field>
+
         </record>
 
-        <!-- Menu: Parent -->
         <menuitem id="menu_students_config_root" name="Configuration"
                   parent="menu_students_root"
                   sequence="100" groups="base.group_system"/>
 
-        <!-- Menu: Settings -->
         <menuitem id="menu_students_general_settings" name="Settings"
                   parent="menu_students_config_root"
                   action="action_students_config_settings"
@@ -68,6 +69,6 @@
 
         
 
-
     </data>
+    
 </odoo>

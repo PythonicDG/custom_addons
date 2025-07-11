@@ -5,7 +5,7 @@
     'author': 'Dipak',
     'category': 'Tools',
     'summary': 'A simple custom module for CRUD operations',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'base_setup'],
     'data': [
         'security/ir.model.access.csv',
         'views/list_view.xml',
